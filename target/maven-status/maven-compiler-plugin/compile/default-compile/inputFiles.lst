@@ -1,0 +1,10 @@
+/home/ba/EOL/workspace/SchedulerAPI/src/main/java/org/bibalex/eol/scheduler/resource/ResourceController.java
+/home/ba/EOL/workspace/SchedulerAPI/src/main/java/org/bibalex/eol/scheduler/SchedulerAPI.java
+/home/ba/EOL/workspace/SchedulerAPI/src/main/java/org/bibalex/eol/scheduler/resource/ResourceRepository.java
+/home/ba/EOL/workspace/SchedulerAPI/src/main/java/org/bibalex/eol/scheduler/exceptions/NotFoundException.java
+/home/ba/EOL/workspace/SchedulerAPI/src/main/java/org/bibalex/eol/scheduler/resource/ResourceService.java
+/home/ba/EOL/workspace/SchedulerAPI/src/main/java/org/bibalex/eol/scheduler/content_partner/ContentPartnerController.java
+/home/ba/EOL/workspace/SchedulerAPI/src/main/java/org/bibalex/eol/scheduler/content_partner/ContentPartnerService.java
+/home/ba/EOL/workspace/SchedulerAPI/src/main/java/org/bibalex/eol/scheduler/content_partner/ContentPartner.java
+/home/ba/EOL/workspace/SchedulerAPI/src/main/java/org/bibalex/eol/scheduler/content_partner/ContentPartnerRepository.java
+/home/ba/EOL/workspace/SchedulerAPI/src/main/java/org/bibalex/eol/scheduler/resource/Resource.java

@@ -1,0 +1,12 @@
+org/bibalex/eol/scheduler/content_partner/ContentPartnerService.class
+org/bibalex/eol/scheduler/resource/ResourceService.class
+org/bibalex/eol/scheduler/resource/ResourceRepository.class
+org/bibalex/eol/scheduler/resource/Resource$Type.class
+org/bibalex/eol/scheduler/resource/ResourceController.class
+org/bibalex/eol/scheduler/resource/Resource$HarvestFrequency.class
+org/bibalex/eol/scheduler/content_partner/ContentPartnerController.class
+org/bibalex/eol/scheduler/content_partner/ContentPartner.class
+org/bibalex/eol/scheduler/SchedulerAPI.class
+org/bibalex/eol/scheduler/content_partner/ContentPartnerRepository.class
+org/bibalex/eol/scheduler/resource/Resource.class
+org/bibalex/eol/scheduler/exceptions/NotFoundException.class
