@@ -3,32 +3,41 @@ package org.bibalex.eol.scheduler.resource;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.bibalex.eol.scheduler.content_partner.ContentPartner;
+import org.bibalex.eol.scheduler.harvest.Harvest;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by sara.mustafa on 4/18/17.
  */
 
 @Entity
-@JsonIgnoreProperties
+@NamedStoredProcedureQuery(name = "harvestResource", procedureName = "harvestResource", resultClasses = {Resource.class },
+        parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "cDate", type = Date.class)
+})
 public class Resource implements Serializable{
 
     private enum Type {
         url,
         file
     }
-    private enum HarvestFrequency{
+    public enum HarvestFrequency{
         once,
         weekly,
         monthly,
         bimonthly,
         quarterly
     }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -38,9 +47,10 @@ public class Resource implements Serializable{
     private Type type;
     private String path;
     private Date last_harvested_at;
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = HarvestFreqConverter.class)
     private HarvestFrequency harvest_frequency;
-    private Date day_of_month;
+    @Range(min = 0, max = 31)
+    private int day_of_month=0;
     private int nodes_count;
     private int position = -1;
     private boolean is_paused = false;
@@ -59,9 +69,10 @@ public class Resource implements Serializable{
     @JoinColumn (name="content_partner_id")
     @JsonBackReference
     private ContentPartner contentPartner;
+    @OneToMany(mappedBy ="resource")
+    private Set<Harvest> harvests = new HashSet<>();
 
-    Resource(){
-
+    public  Resource(){
     }
 
     public long getId() {
@@ -120,11 +131,11 @@ public class Resource implements Serializable{
         this.harvest_frequency = harvest_frequency;
     }
 
-    public Date getDay_of_month() {
+    public int getDay_of_month() {
         return day_of_month;
     }
 
-    public void setDay_of_month(Date day_of_month) {
+    public void setDay_of_month(int day_of_month) {
         this.day_of_month = day_of_month;
     }
 
@@ -144,7 +155,7 @@ public class Resource implements Serializable{
         this.position = position;
     }
 
-    public boolean isIs_paused() {
+    public boolean is_paused() {
         return is_paused;
     }
 
@@ -152,7 +163,7 @@ public class Resource implements Serializable{
         this.is_paused = is_paused;
     }
 
-    public boolean isIs_approved() {
+    public boolean is_approved() {
         return is_approved;
     }
 
@@ -160,7 +171,7 @@ public class Resource implements Serializable{
         this.is_approved = is_approved;
     }
 
-    public boolean isIs_trusted() {
+    public boolean is_trusted() {
         return is_trusted;
     }
 
@@ -168,7 +179,7 @@ public class Resource implements Serializable{
         this.is_trusted = is_trusted;
     }
 
-    public boolean isIs_autopublished() {
+    public boolean is_autopublished() {
         return is_autopublished;
     }
 
@@ -176,7 +187,7 @@ public class Resource implements Serializable{
         this.is_autopublished = is_autopublished;
     }
 
-    public boolean isIs_forced() {
+    public boolean is_forced() {
         return is_forced;
     }
 
@@ -246,5 +257,13 @@ public class Resource implements Serializable{
 
     public void setContentPartner(ContentPartner contentPartner) {
         this.contentPartner = contentPartner;
+    }
+
+    public Set<Harvest> getHarvests() {
+        return harvests;
+    }
+
+    public void setHarvests(Set<Harvest> harvests) {
+        this.harvests = harvests;
     }
 }
